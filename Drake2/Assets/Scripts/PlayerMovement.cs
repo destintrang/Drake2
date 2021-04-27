@@ -32,35 +32,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Vector3 move = new Vector3(0, speed, 0);
-        ////there should be a conditional if/else here that changes the move variable based on the direction we're moving
-        //if(currentDirection = Direction.UP)
-        //{
-        //    transform.position = transform.position + move;
-        //}
-        
-        
-    }
-
-    Vector3 ChangeDirection()
-    {
-        switch (currentDirection)
+        //there should be a conditional if/else here that changes the move variable based on the direction we're moving
+        if(currentDirection == Direction.UP)
         {
-            case Direction.UP:
-                lastDirection = Direction.UP;
-                return (transform.position + new Vector3(0, speed, 0));
-            case Direction.DOWN:
-                lastDirection = Direction.DOWN;
-                return (transform.position + new Vector3(0, -speed, 0));
-            case Direction.LEFT:
-                lastDirection = Direction.LEFT;
-                return (transform.position + new Vector3(-speed, 0, 0));
-            case Direction.RIGHT:
-                lastDirection = Direction.RIGHT;
-                return (transform.position + new Vector3(speed, 0, 0));
+            transform.position = transform.position + new Vector3(0, speed, 0);
         }
-
-        return (transform.position + new Vector3(0, 1, 0));
+        else if (currentDirection == Direction.DOWN)
+        {
+            transform.position = transform.position + new Vector3(0, -speed, 0);
+        }    
+        else if (currentDirection == Direction.LEFT)
+        {
+            transform.position = transform.position + new Vector3(-speed, 0, 0);
+        }
+        else if (currentDirection == Direction.RIGHT)
+        {
+            transform.position = transform.position + new Vector3(speed, 0, 0);
+        }
     }
 
     //This is called every frame to see the player input
@@ -82,6 +70,11 @@ public class PlayerMovement : MonoBehaviour
         //Input.GetButtonDown checks the frame that its pressed down
         //Input.GetButtonUp checks the frame its released
 
+    }
+
+    public Direction GetCurrentDirection ()
+    {
+        return currentDirection;
     }
 
 }
