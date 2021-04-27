@@ -32,12 +32,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 move = new Vector3(0, speed, 0);
-        //there should be a conditional if/else here that changes the move variable based on the direction we're moving
-        if(currentDirection = Direction.UP)
-        {
-            transform.position = transform.position + move;
-        }
+        //Vector3 move = new Vector3(0, speed, 0);
+        ////there should be a conditional if/else here that changes the move variable based on the direction we're moving
+        //if(currentDirection = Direction.UP)
+        //{
+        //    transform.position = transform.position + move;
+        //}
         
         
     }
@@ -66,13 +66,15 @@ public class PlayerMovement : MonoBehaviour
     //This is called every frame to see the player input
     private void UpdateDirection ()
     {
-        if (Input.GetKeyDown(KeyCode.W) && lastDirection != Direction.DOWN) 
-            currentDirection = Direction.UP; 
-        else if (Input.GetKeyDown(KeyCode.S) && lastDirection != Direction.UP) 
-            currentDirection = Direction.DOWN; 
-        else if (Input.GetKeyDown(KeyCode.A) && lastDirection != Direction.RIGHT) 
-            currentDirection = Direction.LEFT; 
-        else if (Input.GetKeyDown(KeyCode.D) && lastDirection != Direction.LEFT) 
+        if (Input.GetKeyDown(KeyCode.W) && currentDirection != Direction.DOWN)
+        {
+            currentDirection = Direction.UP;
+        }
+        else if (Input.GetKeyDown(KeyCode.S) && currentDirection != Direction.UP)
+            currentDirection = Direction.DOWN;
+        else if (Input.GetKeyDown(KeyCode.A) && currentDirection != Direction.RIGHT)
+            currentDirection = Direction.LEFT;
+        else if (Input.GetKeyDown(KeyCode.D) && currentDirection != Direction.LEFT)
             currentDirection = Direction.RIGHT; 
 
         //These all return a bool
