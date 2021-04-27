@@ -34,13 +34,46 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 move = new Vector3(0, speed, 0);
         //there should be a conditional if/else here that changes the move variable based on the direction we're moving
+        if(currentDirection = Direction.UP)
+        {
+            transform.position = transform.position + move;
+        }
+        
+        
+    }
 
-        transform.position = transform.position + move;
+    Vector3 ChangeDirection()
+    {
+        switch (currentDirection)
+        {
+            case Direction.UP:
+                lastDirection = Direction.UP;
+                return (transform.position + new Vector3(0, speed, 0));
+            case Direction.DOWN:
+                lastDirection = Direction.DOWN;
+                return (transform.position + new Vector3(0, -speed, 0));
+            case Direction.LEFT:
+                lastDirection = Direction.LEFT;
+                return (transform.position + new Vector3(-speed, 0, 0));
+            case Direction.RIGHT:
+                lastDirection = Direction.RIGHT;
+                return (transform.position + new Vector3(speed, 0, 0));
+        }
+
+        return (transform.position + new Vector3(0, 1, 0));
     }
 
     //This is called every frame to see the player input
     private void UpdateDirection ()
     {
+        if (Input.GetKeyDown(KeyCode.W) && lastDirection != Direction.DOWN) 
+            currentDirection = Direction.UP; 
+        else if (Input.GetKeyDown(KeyCode.S) && lastDirection != Direction.UP) 
+            currentDirection = Direction.DOWN; 
+        else if (Input.GetKeyDown(KeyCode.A) && lastDirection != Direction.RIGHT) 
+            currentDirection = Direction.LEFT; 
+        else if (Input.GetKeyDown(KeyCode.D) && lastDirection != Direction.LEFT) 
+            currentDirection = Direction.RIGHT; 
 
         //These all return a bool
         //Input.GetButton checks if the button is pressed
