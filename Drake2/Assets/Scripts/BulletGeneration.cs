@@ -9,7 +9,7 @@ public class BulletGeneration : MonoBehaviour
     //Variables for handling attack cooldown
     //After you fire, you're put on cooldown
     [SerializeField] protected int fireCooldown;
-    private float fireCounter = 100;
+    private float fireCounter = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -20,12 +20,14 @@ public class BulletGeneration : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.frameCount % this.fireCounter != 0) return;
-        CheckShoot();
     }
 
     private void FixedUpdate()
     {
+        fireCounter++;
+        if (fireCounter < fireCooldown)
+            return;
+        CheckShoot();
         //Update fire cooldown here
     }
 
@@ -34,8 +36,11 @@ public class BulletGeneration : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             GameObject b =  Instantiate(bullet);
-            b.transform.position = this.transform.position; 
+            b.transform.position = this.transform.position;
             //Probably here is also where we assign the current direction of the player to the bullet
+            PlayerMovement.Direction d = GetComponent<PlayerMovement>().GetCurrentDirection();
+            b.GetComponent<BulletMovement>().SetDirection(d);
+            fireCounter = 0;
         }
     }
 
