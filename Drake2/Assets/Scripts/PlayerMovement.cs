@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     public enum Direction { UP, DOWN, LEFT, RIGHT };
-    Direction currentDirection = Direction.UP;
+    public Direction currentDirection = Direction.UP;
     Direction lastDirection;
 
 

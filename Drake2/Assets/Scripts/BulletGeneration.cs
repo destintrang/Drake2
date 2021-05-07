@@ -8,8 +8,8 @@ public class BulletGeneration : MonoBehaviour
 
     //Variables for handling attack cooldown
     //After you fire, you're put on cooldown
-    [SerializeField] protected float fireCooldown;
-    private float fireCounter = 0;
+    [SerializeField] protected int fireCooldown;
+    private float fireCounter = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +20,7 @@ public class BulletGeneration : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.frameCount % this.fireCounter != 0) return;
         CheckShoot();
     }
 
