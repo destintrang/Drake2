@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class BulletManager : MonoBehaviour
 {
-
+    //Singleton
+    public static BulletManager instance;
+    private void Awake()
+    {
+        instance = this;
+    }
 
     [SerializeField] protected GameObject projectile;
 
@@ -22,4 +27,6 @@ public class BulletManager : MonoBehaviour
     {
         
     }
+
+    public void RequestBullet()
 }
