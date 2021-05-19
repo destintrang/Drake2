@@ -28,5 +28,25 @@ public class BulletManager : MonoBehaviour
         
     }
 
-    public void RequestBullet()
+    public void AddToPool(GameObject p)
+    {
+        p.SetActive(false);
+        pool.Add(p);
+    }
+
+    public GameObject RequestBullet()
+    {
+        if(pool.Count == 0)
+        {
+            return Instantiate(projectile);
+        }
+        else 
+        {
+            GameObject p = pool[0];
+            pool.Remove(p);
+            p.SetActive(true);
+            return p;
+        }
+
+    }
 }

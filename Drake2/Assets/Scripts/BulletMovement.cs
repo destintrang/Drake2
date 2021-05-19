@@ -26,10 +26,34 @@ public class BulletMovement : MonoBehaviour
         transform.position = transform.position + bulletDirection;
     }
 
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.gameObject.GetComponent<Enemy>() != null)
+        {
+            col.gameObject.GetComponent<Enemy>().KillEnemy();
+        }
+    }
+
+
+    IEnumerator ProjectileDuration()
+    {
+
+        float timer = 0f;
+
+        while (timer < 5f)
+        {
+            timer += Time.deltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+
+        BulletManager.instance.AddToPool(this.gameObject);
+
+    }
 
     //We call this when we create the bullet to set its direction
     public void SetDirection(PlayerMovement.Direction direction)
     {
+        StartCoroutine(ProjectileDuration());
         //Change bulletDirection
         if (direction == PlayerMovement.Direction.UP)
         {

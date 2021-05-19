@@ -35,7 +35,7 @@ public class BulletGeneration : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            GameObject b =  Instantiate(bullet);
+            GameObject b =  BulletManager.instance.RequestBullet();
             b.transform.position = this.transform.position;
             //Probably here is also where we assign the current direction of the player to the bullet
             PlayerMovement.Direction d = GetComponent<PlayerMovement>().GetCurrentDirection();
