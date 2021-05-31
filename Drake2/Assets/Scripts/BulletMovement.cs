@@ -30,7 +30,7 @@ public class BulletMovement : MonoBehaviour
     {
         if(col.gameObject.GetComponent<Enemy>() != null)
         {
-            col.gameObject.GetComponent<Enemy>().KillEnemy();
+            col.gameObject.GetComponent<Enemy>().TakeDamage();
         }
     }
 

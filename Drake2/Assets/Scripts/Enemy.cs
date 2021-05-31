@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
 
 
-    [SerializeField] protected int maxHealth;
+    [SerializeField] protected int maxHealth = 3;
     private int currentHealth;
 
 
@@ -29,6 +29,10 @@ public class Enemy : MonoBehaviour
 
         //Decrement health
         //If the enemy health hits 0, then the enemy dies
+        if (currentHealth > 0)
+            currentHealth--;
+        else
+            KillEnemy();
     }
 
     public void KillEnemy()
