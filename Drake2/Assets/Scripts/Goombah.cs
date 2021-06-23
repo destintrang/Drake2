@@ -5,6 +5,8 @@ using UnityEngine;
 public class Goombah : MonoBehaviour
 {
     Vector3 targetDestination = new Vector3 (0,0,-1);
+    Vector3 startingPosition = new Vector3();
+    [SerializeField] protected float speed = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -22,12 +24,16 @@ public class Goombah : MonoBehaviour
     {
         if (targetDestination == new Vector3 (0,0,-1))
         {
+            //this is where we begin a new cycle
+            startingPosition = this.transform.position;
             targetDestination = GetTargetLocation();
             Debug.Log(targetDestination);
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetDestination, 10f * Time.deltaTime);
+            float percentageTravelled = (this.transform.position - startingPosition).magnitude / (targetDestination - startingPosition).magnitude;
+            float reduceSpeed = Mathf.Lerp(speed, 3f, percentageTravelled);
+            transform.position = Vector3.MoveTowards(transform.position, targetDestination, reduceSpeed * Time.deltaTime);
         }
 
         if(this.transform.position == targetDestination)
@@ -43,4 +49,10 @@ public class Goombah : MonoBehaviour
         return this.transform.position + difference * 2f;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        startingPosition = this.transform.position;
+        targetDestination = GetTargetLocation();
+        Debug.Log(targetDestination);
+    }
 }

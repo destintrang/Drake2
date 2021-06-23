@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Enemy : MonoBehaviour
 {
-
-
+    [SerializeField] protected int score = 3;
     [SerializeField] protected int maxHealth = 3;
     private int currentHealth;
 
@@ -36,6 +36,7 @@ public class Enemy : MonoBehaviour
 
     public void KillEnemy()
     {
+        Player.instance.incrementScore(score);
         Destroy(this.gameObject);
     }
 
