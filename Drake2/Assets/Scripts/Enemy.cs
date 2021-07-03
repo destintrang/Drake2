@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Enemy : MonoBehaviour
+public class Enemy : Unit
 {
     [SerializeField] protected int score = 3;
-    [SerializeField] protected int maxHealth = 3;
-    private int currentHealth;
-
+    
 
     // Start is called before the first frame update
     void Start()
@@ -23,21 +21,11 @@ public class Enemy : MonoBehaviour
     }
 
 
-    public void TakeDamage ()
-    {
-        //Call this when you get hit by a bullet
-
-        //Decrement health
-        //If the enemy health hits 0, then the enemy dies
-       currentHealth--;
-       if (currentHealth <= 0) 
-            KillEnemy();
-    }
-
-    public void KillEnemy()
+    public override void Death()
     {
         Player.instance.incrementScore(score);
         Destroy(this.gameObject);
+        WaveManager.instance.OnEnemyDeath();
     }
 
 

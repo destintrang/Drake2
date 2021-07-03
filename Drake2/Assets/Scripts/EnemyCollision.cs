@@ -20,7 +20,7 @@ public class EnemyCollision : MonoBehaviour
     {
         if(col.gameObject.GetComponent<PlayerMovement>() != null)
         {
-           Debug.Log("big cocks");      
+            Player.instance.TakeDamage();     
         }    
         
     }

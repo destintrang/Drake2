@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Unit
 {
-    [SerializeField] protected int maxHealth = 3;
-    private int currentHealth;
     private int score = 0;
 
     //Singleton
@@ -30,5 +28,10 @@ public class Player : MonoBehaviour
     public void incrementScore(int s)
     {
         score += s;
+    }
+
+    public override void Death()
+    {
+        Debug.Log("you died");
     }
 }
