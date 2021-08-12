@@ -12,7 +12,7 @@ public class WaveManager : MonoBehaviour
     }
 
     private float Xbound = 30;
-    private float Ybound = 15;
+    private float Ybound = 11;
     private int ActiveEnemies = 0;
     private int MaxEnemies = 2;
     [SerializeField] protected Enemy e;
