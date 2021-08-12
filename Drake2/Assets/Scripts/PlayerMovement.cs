@@ -95,4 +95,16 @@ public class PlayerMovement : MonoBehaviour
     //    }
     //}
 
+    IEnumerator Roll ()
+    {
+
+        int counter = 0;
+        int rollDuration = 5;
+
+        while (counter < rollDuration)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
 }
