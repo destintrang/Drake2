@@ -33,5 +33,7 @@ public class Player : Unit
     public override void Death()
     {
         Debug.Log("you died");
+        //use instance to call singletons 
+        GameManager.instance.GameOver();
     }
 }

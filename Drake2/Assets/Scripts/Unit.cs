@@ -6,6 +6,7 @@ public class Unit : MonoBehaviour
 {
     [SerializeField] protected int maxHealth = 3;
     protected int currentHealth;
+    [SerializeField] protected List<MonoBehaviour> ToDeactivate; 
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,15 @@ public class Unit : MonoBehaviour
         currentHealth--;
         if (currentHealth <= 0)
             Death();
+    }
+
+    public void OnGameOver()
+    {
+        //this.enabled = false;
+        foreach(var s in ToDeactivate)
+        {
+            s.enabled = false;
+        }
     }
 
     public virtual void Death()
