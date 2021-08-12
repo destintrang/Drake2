@@ -48,6 +48,7 @@ public class WaveManager : MonoBehaviour
         return new Vector3(Random.Range(-Xbound, Xbound), Random.Range(-Ybound, Ybound), 0);
     }
 
+
     public void OnEnemyDeath()
     {
         ActiveEnemies--;

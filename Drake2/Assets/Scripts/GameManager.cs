@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
         {
             u.OnGameOver();
         }
+        WaveManager.instance.enabled = false;
     }
 
     // Start is called before the first frame update
