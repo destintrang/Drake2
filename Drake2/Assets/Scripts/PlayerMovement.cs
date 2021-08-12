@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -33,14 +33,14 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //there should be a conditional if/else here that changes the move variable based on the direction we're moving
-        if(currentDirection == Direction.UP)
+        if (currentDirection == Direction.UP)
         {
             transform.position = transform.position + new Vector3(0, speed, 0);
         }
         else if (currentDirection == Direction.DOWN)
         {
             transform.position = transform.position + new Vector3(0, -speed, 0);
-        }    
+        }
         else if (currentDirection == Direction.LEFT)
         {
             transform.position = transform.position + new Vector3(-speed, 0, 0);
@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //This is called every frame to see the player input
-    private void UpdateDirection ()
+    private void UpdateDirection()
     {
         if (Input.GetKeyDown(KeyCode.W) && currentDirection != Direction.DOWN)
         {
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.A) && currentDirection != Direction.RIGHT)
             currentDirection = Direction.LEFT;
         else if (Input.GetKeyDown(KeyCode.D) && currentDirection != Direction.LEFT)
-            currentDirection = Direction.RIGHT; 
+            currentDirection = Direction.RIGHT;
 
         //These all return a bool
         //Input.GetButton checks if the button is pressed
@@ -72,9 +72,27 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    public Direction GetCurrentDirection ()
+    public Direction GetCurrentDirection()
     {
         return currentDirection;
     }
+
+    private void CheckRoll()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+
+        }
+    }
+
+    //IEnumerator Roll()
+    //{
+    //    private int counter = 0;
+    //    private int rollDuration = 5;
+    //    while(counter<rollDuration)
+    //    {
+    //        yield return new WaitForFixedUpdate();
+    //    }
+    //}
 
 }
