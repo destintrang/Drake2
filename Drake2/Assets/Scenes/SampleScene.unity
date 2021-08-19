@@ -437,6 +437,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.1
+  baseSpeed: 0.1
+  rollCooldown: 100
   currentDirection: 0
 --- !u!212 &844230681
 SpriteRenderer:

@@ -6,12 +6,14 @@ public class PlayerMovement : MonoBehaviour
 {
 
     [SerializeField] protected float speed = 0.1f;
-
+    [SerializeField] protected float baseSpeed = 0.1f;
+    [SerializeField] protected int rollCooldown;
+    private float rollCounter = 0;
 
     public enum Direction { UP, DOWN, LEFT, RIGHT };
     public Direction currentDirection = Direction.UP;
     Direction lastDirection;
-
+    private bool rolling = false;
 
     const KeyCode UP = KeyCode.W;
     const KeyCode DOWN = KeyCode.S;
@@ -21,17 +23,23 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        rollCounter = rollCooldown;
+        speed = baseSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+        CheckRoll();
+        if (rolling) return;
         UpdateDirection();
     }
 
     private void FixedUpdate()
     {
+        rollCounter++;
+        
         //there should be a conditional if/else here that changes the move variable based on the direction we're moving
         if (currentDirection == Direction.UP)
         {
@@ -74,37 +82,45 @@ public class PlayerMovement : MonoBehaviour
 
     public Direction GetCurrentDirection()
     {
-        return currentDirection;
+        if(!rolling)
+        {
+            return currentDirection;
+        }
+        else
+        {
+            if (currentDirection == Direction.UP) return Direction.DOWN;
+            else if (currentDirection == Direction.DOWN) return Direction.UP;
+            else if (currentDirection == Direction.LEFT) return Direction.RIGHT;
+            else if (currentDirection == Direction.RIGHT) return Direction.LEFT;
+            else return currentDirection;
+        }
     }
 
     private void CheckRoll()
     {
+        if (rollCounter < rollCooldown) return;
         if (Input.GetKeyDown(KeyCode.Q))
         {
-
+            StartCoroutine(Roll());
+            Debug.Log("roll");
+            rollCounter = 0;
         }
     }
-
-    //IEnumerator Roll()
-    //{
-    //    private int counter = 0;
-    //    private int rollDuration = 5;
-    //    while(counter<rollDuration)
-    //    {
-    //        yield return new WaitForFixedUpdate();
-    //    }
-    //}
 
     IEnumerator Roll ()
     {
 
         int counter = 0;
-        int rollDuration = 5;
-
+        int rollDuration = 20;
+        rolling = true;
+        speed *= 2;
         while (counter < rollDuration)
         {
+            counter++;
             yield return new WaitForFixedUpdate();
         }
+        speed = baseSpeed;
+        rolling = false;
     }
 
 }

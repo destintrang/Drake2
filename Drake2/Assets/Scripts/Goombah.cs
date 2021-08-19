@@ -27,7 +27,6 @@ public class Goombah : MonoBehaviour
             //this is where we begin a new cycle
             startingPosition = this.transform.position;
             targetDestination = GetTargetLocation();
-            Debug.Log(targetDestination);
         }
         else
         {
@@ -53,6 +52,5 @@ public class Goombah : MonoBehaviour
     {
         startingPosition = this.transform.position;
         targetDestination = GetTargetLocation();
-        Debug.Log(targetDestination);
     }
 }
