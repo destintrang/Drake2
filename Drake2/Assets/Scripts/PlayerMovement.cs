@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public Direction currentDirection = Direction.UP;
     Direction lastDirection;
     private bool rolling = false;
+    private bool shootReversed = false;
 
     const KeyCode UP = KeyCode.W;
     const KeyCode DOWN = KeyCode.S;
@@ -82,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Direction GetCurrentDirection()
     {
-        if(!rolling)
+        if(!shootReversed)
         {
             return currentDirection;
         }
@@ -112,6 +113,7 @@ public class PlayerMovement : MonoBehaviour
 
         int counter = 0;
         int rollDuration = 20;
+        shootReversed = true;
         rolling = true;
         speed *= 2;
         while (counter < rollDuration)
@@ -121,6 +123,15 @@ public class PlayerMovement : MonoBehaviour
         }
         speed = baseSpeed;
         rolling = false;
+
+        counter = 0;
+        int reverseDuration = 40;
+        while (counter < reverseDuration)
+        {
+            counter++;
+            yield return new WaitForFixedUpdate();
+        }
+        shootReversed = false;
     }
 
 }

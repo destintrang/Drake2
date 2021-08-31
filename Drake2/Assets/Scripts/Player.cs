@@ -28,6 +28,7 @@ public class Player : Unit
     public void incrementScore(int s)
     {
         score += s;
+        UIManager.instance.UpdateScore(score);
     }
 
     public override void Death()

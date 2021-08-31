@@ -16,6 +16,7 @@ public class WaveManager : MonoBehaviour
     private int ActiveEnemies = 0;
     private int MaxEnemies = 2;
     [SerializeField] protected Enemy e;
+    [SerializeField] protected float safeSpawnDistance;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +46,14 @@ public class WaveManager : MonoBehaviour
 
     Vector3 GetRandomPosition()
     {
-        return new Vector3(Random.Range(-Xbound, Xbound), Random.Range(-Ybound, Ybound), 0);
+        Vector3 randomPosition;
+        while(true)
+        {
+            Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+            randomPosition = new Vector3(Random.Range(-Xbound, Xbound), Random.Range(-Ybound, Ybound), 0);
+            if (Vector3.Distance(playerPosition, randomPosition) > safeSpawnDistance)
+                return randomPosition;
+        }
     }
 
 
