@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private bool paused = false;
     //Singleton
     public static GameManager instance;
     private void Awake()
@@ -11,12 +12,41 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
+    private void PauseObjects()
+    {
+        foreach(PausableObject p in FindObjectsOfType<PausableObject>())
+        {
+            p.PauseObject();
+        }
+    }
+    private void UnpauseObjects()
+    {
+        foreach (PausableObject p in FindObjectsOfType<PausableObject>())
+        {
+            p.UnpauseObject();
+        }
+    }
+
+    private void CheckForPause()
+    {
+        if (Input.GetKeyDown(KeyCode.P) )
+        {
+            if (paused)
+            {
+                UnpauseObjects();
+                paused = false;
+            }
+            else
+            {
+                PauseObjects();
+                paused = true;
+            }      
+        }
+    }
+
     public void GameOver()
     {
-        foreach (Unit u in FindObjectsOfType<Unit>())
-        {
-            u.OnGameOver();
-        }
+        PauseObjects();
         WaveManager.instance.enabled = false;
     }
 
@@ -31,6 +61,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CheckForPause();
     }
 }

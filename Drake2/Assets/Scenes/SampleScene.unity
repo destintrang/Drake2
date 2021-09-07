@@ -837,8 +837,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - SfxName: shoot
-    sound: {fileID: 0}
+  - SfxName: Shoot
+    sound: {fileID: 8300000, guid: 14d7b170fb632a145b8df5b63320bcdc, type: 3}
     volume: 1
     pitch: 1
     playOnAwake: 0
@@ -849,6 +849,12 @@ MonoBehaviour:
     pitch: 1
     playOnAwake: 0
     loop: 0
+  - SfxName: BGM
+    sound: {fileID: 8300000, guid: 79ab670a64cbddc4c976d8d8f0f6a885, type: 3}
+    volume: 0.098
+    pitch: 1
+    playOnAwake: 1
+    loop: 1
   trackTransitionTime: 0
 --- !u!4 &935166624
 Transform:

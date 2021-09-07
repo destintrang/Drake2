@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour
+public class Unit : PausableObject
 {
     [SerializeField] protected int maxHealth = 3;
     protected int currentHealth;
@@ -30,12 +30,20 @@ public class Unit : MonoBehaviour
             Death();
     }
 
-    public void OnGameOver()
+    public override void PauseObject()
     {
         //this.enabled = false;
         foreach(var s in ToDeactivate)
         {
             s.enabled = false;
+        }
+    }
+
+    public override void UnpauseObject()
+    {
+        foreach (var s in ToDeactivate)
+        {
+            s.enabled = true;
         }
     }
 

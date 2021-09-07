@@ -41,6 +41,7 @@ public class BulletGeneration : MonoBehaviour
             PlayerMovement.Direction d = GetComponent<PlayerMovement>().GetCurrentDirection();
             b.GetComponent<BulletMovement>().SetDirection(d);
             fireCounter = 0;
+            AudioManager.instance.PlaySoundEffect("Shoot");
         }
     }
 

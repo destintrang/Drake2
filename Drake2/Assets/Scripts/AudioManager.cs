@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    //Singleton
+    public static AudioManager instance;
+ 
+
     [SerializeField] protected List<Sound> sounds;
     private Dictionary<string, Sound> soundLibrary = new Dictionary<string, Sound>();
 
@@ -15,9 +19,10 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
         foreach (Sound s in sounds)
         {
-
+            
             AudioSource source = gameObject.AddComponent<AudioSource>();
 
             //Add to dictionary so that sound can be accessed by name
