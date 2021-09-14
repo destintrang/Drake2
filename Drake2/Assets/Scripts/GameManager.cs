@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] protected GameObject deathScreen;
+
     private bool paused = false;
+    private bool isDead = false;
     //Singleton
     public static GameManager instance;
     private void Awake()
@@ -44,10 +48,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void CheckForDeathInput()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
     public void GameOver()
     {
         PauseObjects();
         WaveManager.instance.enabled = false;
+        deathScreen.SetActive(true);
+        isDead = true;
     }
 
     // Start is called before the first frame update
@@ -62,5 +75,9 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         CheckForPause();
+        if(isDead)
+        {
+            CheckForDeathInput();
+        }
     }
 }
